@@ -27,10 +27,17 @@
     </div>
 
     <div class="container mt-5">
-        <h2> <%=@location%> weather: </h2>
+        <h2> <%=@location_result_city%> weather: </h2>
             <h3> It is currently <%=@current_temperature%> degrees and <%=@current_conditions%>.</h3>
         
-        
+            <div class ="row">
+                <% for day in @future_forecast.slice(0,5) %>
+                    <div class="col-sm-2">
+                        On <%= "#{Time.at(day["time"]).strftime("%A")}" %> there will be a high of <%= day["temperatureHigh"] %> degrees fahrenheit and <%= day["summary"] %>
+                    </div>
+                <% end %>
+            </div>    
+            
 
 
     </div>
