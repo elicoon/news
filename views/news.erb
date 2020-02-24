@@ -18,25 +18,25 @@
     <!-- Your own CSS -->
     <link rel="stylesheet" href="/styles.css">
 
-    <title>Submit Location</title>
+    <title>News</title>
   </head>
-
-    <!-- Page body begins here -->
   <body>
 
     <div class="container mt-5">
-      <h1>Submit your location</h1>
+      <h1>News and Weather</h1>
+    </div>
 
-    <form action="/news">
-        <label>Location:</label>
-        <input type="text" name="q">
-        <button type="submit" class="btn btn-success">Submit</button>
-    </form>
+    <div class="container mt-5">
+        <h2> <%=@location%> weather: </h2>
+            <h3> It is currently <%=@current_temperature%> degrees and <%=@current_conditions%>.</h3>
+        
+        
+
+
     </div>
 
 
-
-    </div>
+    All news gathered from NewsAPI.org. Please visit their website to find out more.
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
