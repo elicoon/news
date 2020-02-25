@@ -1,0 +1,10 @@
+/* Typography */
+body {
+  /* Everything is Montserrat */
+    font-family: 'Montserrat', ;
+}
+/* Except we're using more specific rules to override the h1 titles */
+h1 {
+    font-family: 'Abril+Fatface', ;
+}
+
