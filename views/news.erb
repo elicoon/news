@@ -29,16 +29,25 @@
 
     <div class="container mt-5">
         <h2> <%=@location_result_city%> Weather: </h2>
-            <h3> It is currently <%=@current_temperature%> degrees and <%=@current_conditions%>.</h3>
+            <h3> It is currently <%=@current_temperature.round(0)%>°. Expect <%=@current_conditions.downcase%>.</h3>
         
             <!-- future forecast loop -->
             <div class ="row">
-                <% for day in @future_forecast.slice(0,5) %>
-                    <div class="col-sm-2">
-                        On <%= "#{Time.at(day["time"]).strftime("%A")}" %> there will be a high of <%= day["temperatureHigh"] %> degrees fahrenheit and <%= day["summary"] %>
+                <% for day in @future_forecast.slice(0,4) %>
+                    <div class="col-sm-3">
+                        <h4>
+                            <%= "#{Time.at(day["time"]).strftime("%A")}" %>: 
+                        </h4>
+                        <h5>
+                            High Temperature: <%= day["temperatureHigh"].round(0) %>°
+                        <br>
+                            Low Temperature: <%= day["temperatureLow"].round(0) %>°
+                        <br>
+                            Conditions: <%= day["summary"] %>
+                        </h5>
                     </div>
                 <% end %>
-            </div>    
+            </div>   
     </div>
     
     <div class="container mt-5">
