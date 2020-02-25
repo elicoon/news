@@ -26,10 +26,12 @@
       <h1>News and Weather</h1>
     </div>
 
+
     <div class="container mt-5">
-        <h2> <%=@location_result_city%> weather: </h2>
+        <h2> <%=@location_result_city%> Weather: </h2>
             <h3> It is currently <%=@current_temperature%> degrees and <%=@current_conditions%>.</h3>
         
+            <!-- future forecast loop -->
             <div class ="row">
                 <% for day in @future_forecast.slice(0,5) %>
                     <div class="col-sm-2">
@@ -37,13 +39,49 @@
                     </div>
                 <% end %>
             </div>    
-            
+    </div>
+    
+    <div class="container mt-5">
+      <h4>Change your location</h4>
 
-
+    <form action="/news">
+        <label>Location:</label>
+        <input type="text" name="q">
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+    </div>
+    
+    <div>
     </div>
 
+    <div class="container mt-5">
+        <h2>Latest Headlines: </h2>
+            <!-- news headlines loop -->
+            <div class="row">
+                <% for article in @news_array.slice(0,6) %>
+                    <div class="col-sm-6">
+                        Source: <%= article["source"]["name"] %>
+                            <br>
+                        Date: <%= article["publishedAt"] %>
+                            <br>
+                        <!-- Link to image -->
+                        <img src="<%= article["urlToImage"] %>" class="img-fluid">
+                            <br>
+                        Title: <%= article["title"] %>
+                            <br>
+                        <!-- Link URL -->
+                        <%= article["url"] %>
+                            <br><br>
+                    </div>
+                <% end %>
+            </div>            
+    </div>
+    <div>
+    </div>
 
+    <div class="container mt-5">
     All news gathered from NewsAPI.org. Please visit their website to find out more.
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -10,10 +10,6 @@ before { puts "Parameters: #{params}" }
 # enter your Dark Sky API key here
 ForecastIO.api_key = "2d31f2693209b31c67232a10ff2a1feb"
 
-# NewsAPI key and code is below
-url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=be45392a87674b5a9b2f298fb7074f50"
-news = HTTParty.get(url).parsed_response.to_hash
-
 get "/" do
   # show a view that asks for the location
   view "ask"
@@ -39,8 +35,15 @@ forecast = ForecastIO.forecast(lat_long[0],lat_long[1]).to_hash
 
 # dealing with time in forecast hash. Can use these variables for loops
 @today_day_of_week=Time.at(forecast["currently"]["time"]).strftime("%A")
-# @referenced_day_of_week=Time.at(forecast["daily"]["data"]["SPECIFY DAY LOOPS"]["time"]]).strftime("%A") 
 
+# next, pull in headlines using the NewsAPI 
+url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=be45392a87674b5a9b2f298fb7074f50"
+news = HTTParty.get(url).parsed_response.to_hash
+
+# define simplified variable for news stories
+@news_array=news["articles"] #variable ready for looping. 
+
+# after looping, the hash elements to call are ["source"]["name"] ["author"] ["title"] ["description"] ["url"] ["urlToImage"] ["publishedAt"] and ["content"]
 
 view "news"
 end
