@@ -47,3 +47,15 @@ news = HTTParty.get(url).parsed_response.to_hash
 
 view "news"
 end
+
+get "/business" do
+
+# pull in headlines using the NewsAPI 
+url = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=be45392a87674b5a9b2f298fb7074f50"
+news = HTTParty.get(url).parsed_response.to_hash
+
+# define simplified variable for news stories
+@news_array=news["articles"] #variable ready for looping. 
+
+    view "business"
+end
