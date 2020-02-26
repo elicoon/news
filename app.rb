@@ -12,6 +12,16 @@ ForecastIO.api_key = "2d31f2693209b31c67232a10ff2a1feb"
 
 get "/" do
   # show a view that asks for the location
+    # do everything else:
+ # next, pull in headlines using the NewsAPI 
+url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=be45392a87674b5a9b2f298fb7074f50"
+news = HTTParty.get(url).parsed_response.to_hash
+
+# define simplified variable for news stories
+@news_array=news["articles"] #variable ready for looping. 
+
+# after looping, the hash elements to call are ["source"]["name"] ["author"] ["title"] ["description"] ["url"] ["urlToImage"] ["publishedAt"] and ["content"]
+
   view "ask"
 end
 
@@ -49,7 +59,7 @@ view "news"
 end
 
 get "/business" do
-
+@form_entry = params["q"]
 # pull in headlines using the NewsAPI 
 url = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=be45392a87674b5a9b2f298fb7074f50"
 news = HTTParty.get(url).parsed_response.to_hash
@@ -58,4 +68,28 @@ news = HTTParty.get(url).parsed_response.to_hash
 @news_array=news["articles"] #variable ready for looping. 
 
     view "business"
+end
+
+get "/sports" do
+@form_entry = params["q"]
+# pull in headlines using the NewsAPI 
+url = "https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=be45392a87674b5a9b2f298fb7074f50"
+news = HTTParty.get(url).parsed_response.to_hash
+
+# define simplified variable for news stories
+@news_array=news["articles"] #variable ready for looping. 
+
+    view "sports"
+end
+
+get "/technology" do
+@form_entry = params["q"]
+# pull in headlines using the NewsAPI 
+url = "https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=be45392a87674b5a9b2f298fb7074f50"
+news = HTTParty.get(url).parsed_response.to_hash
+
+# define simplified variable for news stories
+@news_array=news["articles"] #variable ready for looping. 
+
+    view "technology"
 end
